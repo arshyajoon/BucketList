@@ -1,0 +1,35 @@
+//
+//  Result.swift
+//  BucketList.swift
+//
+//  Created by Arshya GHAVAMI on 3/12/21.
+//
+
+import SwiftUI
+struct Result: Codable {
+    let query: Query
+}
+
+struct Query: Codable {
+    let pages: [Int: Page]
+}
+
+struct Page: Codable, Comparable  {
+    let pageid: Int
+    let title: String
+    let terms: [String: [String]]?
+    var description: String {
+        terms?["description"]?.first ?? "No further information"
+    }
+    
+    static func < (lhs: Page, rhs: Page) -> Bool {
+        lhs.title < rhs.title
+    }
+}
+
+
+//struct Result_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Result()
+//    }
+//}
